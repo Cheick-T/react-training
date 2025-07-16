@@ -12,6 +12,13 @@ function Main() {
     const [ingredients , setingredients]= React.useState(["eggs", "milk", "flour"]);
     let [recipeShown, setrecipeShown]= React.useState(false);
 
+    // ToDo : Make the window scroll to the recipe when it is generated
+    const recipeRef = React.useRef(null);
+    React.useEffect(() => {
+        console.log('Recipe ref updated:', recipeRef.current);      
+    }, [recipeShown]);    
+    //console.log(recipeRef)
+
     const ingredientsList = ingredients.map((ingredient, index) => {
         return <li key={index}>{ingredient}</li>});   
 
@@ -34,7 +41,7 @@ function Main() {
                 <button type="submit" > + Add ingredients</button>
             </form>
        
-            { ingredientsList.length > 0 && <IngredientsList ingredientsList = {ingredientsList} setrecipeShown = {handleGetRecipe}/>}
+            { ingredientsList.length > 0 && <IngredientsList ingredientsList = {ingredientsList} setrecipeShown = {handleGetRecipe} ref = {recipeRef}/> }
             { recipeShown ? <ClaudeRepice  recipe = {recipeShown}/> : null}        
     </main>
         
